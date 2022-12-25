@@ -1,0 +1,4 @@
+// Configurar el transpilador  js moderno -> js estandar
+{
+    "presets": ["@babel/preset-env"]
+}
