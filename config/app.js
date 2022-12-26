@@ -1,10 +1,12 @@
 
 import express from "express";
 import morgan from "morgan";
+import config from "./config";
+
 const app = express();
 
 // Settings
-app.set("port", 4000);
+app.set("port", config.port);
 
 // Middlewares
 app.use(morgan("dev"));

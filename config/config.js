@@ -5,6 +5,8 @@ config()
 export default {
     host: process.env.HOST || '',
     database: process.env.DATABASE || '',
-    user: process.env.USER || '',
-    password: process.env.PASSWORD || ''
+    user: process.env.USERDB || '',
+    password: process.env.PASSWORD || '',
+    portdb: process.env.PORTDB || 3306,
+    port: process.env.PORT || 4000
 }

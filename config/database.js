@@ -1,4 +1,4 @@
-/* import mysql from "promise-mysql";
+import mysql from "promise-mysql";
 import config from "./config";
 
 const connection = mysql.createConnection({
@@ -8,10 +8,6 @@ const connection = mysql.createConnection({
     password: config.password
 });
 
-const getConnection = () => {
-    return connection;
-};
+const getConnection = () => connection;
 
-module.exports = {
-    getConnection
-}; */
+module.exports = { getConnection };
