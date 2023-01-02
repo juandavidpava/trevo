@@ -1,28 +1,32 @@
 import { repository } from "../database/repositories/user";
 
 const getUsers = async () => {
-    const response = await repository.getUsers()
-    return response;
+    const users = await repository.getUsers()
+    return users;
 };
 
-const addUser = async () => {
-    const response = await repository.addUser()
-    return response;
+const addUser = async user => {
+    const userCreated = await repository.addUser(user)
+    return userCreated;
 };
 
-const findUser = async () => {
-    const response = await repository.findUser()
-    return response;
+const findUser = async id => {
+    const user = await repository.findUser(id)
+    return user;
 };
 
-const deleteUser = async () => {
-    const response = await repository.deleteUser()
-    return response;
+const deleteUser = async user => {
+    await repository.deleteUser(user)
 };
 
-const updateUser = async () => {
-    const response = await repository.updateUser()
-    return response;
+const updateUser = async (user,body) => {
+    const userUpdate = await repository.updateUser(user,body)
+    return userUpdate;
+};
+
+const searchUserEmail = async email => {
+    const user = await repository.searchUserEmail(email)
+    return user;
 };
 
 export const service = {
@@ -30,5 +34,6 @@ export const service = {
     addUser,
     findUser,
     deleteUser,
-    updateUser
+    updateUser,
+    searchUserEmail
 }

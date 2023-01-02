@@ -1,13 +1,11 @@
-import mysql from "promise-mysql";
 import config from "./config";
+import { Sequelize } from "sequelize";
 
-const connection = mysql.createConnection({
+const db = new Sequelize(config.database, config.user, config.password,{
     host: config.host,
-    database: config.database,
-    user: config.user,
-    password: config.password
-});
+    dialect: 'mysql',
+    // Para mostarr los log de las consultas a BD
+    // logging: false
+})
 
-const getConnection = () => connection;
-
-module.exports = { getConnection };
+export default db;
