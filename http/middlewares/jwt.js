@@ -1,17 +1,12 @@
-import config from "../../config/config";
+import { httpUnauthorizedError } from "../helpers/responseHandler";
+import { tokenVerify } from '../helpers/JWTHandler';
 
 const checkAuthorization = (req, res, next) => {
-   const header = req?.headers?.authorization
-   if(!header){
-      res.status(409);
-      res.send({error:'header error'})
-   }
-   // TODO DO: Hacer vallidacion con token dinamico jwt
-   if(header !== 'Bearer aabbcc11226633' ){
-      res.status(409);
-      res.send({error:'without permission'})
-   }
+   if(!req.headers.authorization) throw new httpUnauthorizedError(res, 'Token not present');
 
+   const token = req.headers.authorization.split(' ').pop();
+   tokenVerify(res, token)
+   
    next()
 }
 

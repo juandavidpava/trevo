@@ -21,9 +21,16 @@ const httpSuccess= (res, data = {}) => {
     res.json({ data, status:200 })
 }
 
+const httpUnauthorizedError = (res, err = 'client error') => {
+    console.log(err)
+    res.status(401)
+    res.send({ error: `Unauthorized Error, ${err}`, status:401 })
+}
+
 export {
     httpInternalServerError,
     httpBadRequestError,
     httpSuccess,
-    httpNotFoundError
+    httpNotFoundError,
+    httpUnauthorizedError
 }

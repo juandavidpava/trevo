@@ -1,15 +1,25 @@
-import { service } from "../../services/login";
-import { httpInternalServerError, httpSuccess } from "../helpers/responseHandler";
+import { matchedData } from "express-validator";
+import { httpInternalServerError, httpBadRequestError, httpUnauthorizedError, httpSuccess } from "../helpers/responseHandler";
+import { comparePassword } from "../helpers/passwordHandler";
+import { service } from "../../services/user";
+import { tokenSing } from "../helpers/JWTHandler";
 
 const login = async (req, res) => {
     try {
-        const {username, password} = req?.body
+        req = matchedData(req)
 
-        if(!username || !password) throw new httpBadRequestError(res);
+        const user = await service.searchUserEmail(req.email)
+        if(!user) throw new httpUnauthorizedError(res, 'Incorrect username or password');
 
-        console.log(username, password)
-        const response = await service.login()  
-        httpSuccess(res,response)
+        const check = await comparePassword(req.password, user.password)
+        if(!check) throw new httpUnauthorizedError(res, 'Incorrect username or password');
+
+
+        const userClass = await service.findUser(user.id)
+        const token = tokenSing(user)
+        const userUpdate = await service.updateUser(userClass, {token})
+        delete userUpdate.password
+        httpSuccess(res, {user:userUpdate})
     } catch (error) {;
         httpInternalServerError(res, error)
     }

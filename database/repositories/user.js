@@ -14,7 +14,7 @@ const addUser = async user => {
 };
 
 const findUser = async id => {
-    const user = User.findByPk(id)
+    const user = User.findOne({id})
     return user;
 };
 
@@ -29,7 +29,7 @@ const updateUser = async (user,body) => {
 
 const searchUserEmail = async email => {
     const user =  await db.query(`SELECT * FROM users WHERE email= '${email}'`, { type: QueryTypes.SELECT });
-    return user;
+    return user[0];
 };
 
 export const repository = {
