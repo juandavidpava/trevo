@@ -1,9 +1,19 @@
-import { service } from "../../services/user";
+import { matchedData } from "express-validator";
 import { httpInternalServerError, httpSuccess, httpNotFoundError, httpBadRequestError } from "../helpers/responseHandler";
+import { encryptPassword } from "../helpers/passwordHandler";
+import { service } from "../../services/user";
+import { tokenSing } from "../helpers/JWTHandler";
 
 const getUsers = async (req, res) => {
     try {
-        const users = await service.getUsers()
+        const originalUsers = await service.getUsers()
+
+        // no mandamos pass por seguridad
+        const users = originalUsers.map(user => {
+            delete user.dataValues.password
+            return user
+        })
+
         httpSuccess(res, {users})
     } catch (error) {
         httpInternalServerError(res, error)
@@ -11,11 +21,16 @@ const getUsers = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    try {       
-        const foundUser = await service.searchUserEmail(req.body.email)
+    try {
+        req = matchedData(req)
+        const foundUser = await service.searchUserEmail(req.email)
         if(foundUser.length > 0) throw new httpBadRequestError(res,"email used");
 
-        const user = await service.addUser(req.body)
+        const password = await encryptPassword(req.password)
+        const token = await tokenSing(req)
+        const body = {...req, password, token}
+        const user = await service.addUser(body)
+        delete user.dataValues.password
         
         httpSuccess(res, {user})
     } catch (error) {
@@ -32,6 +47,7 @@ const findUser = async (req, res) => {
         const user = await service.findUser(id)
 
         if(!user) throw new httpNotFoundError(res);
+        delete user.dataValues.password
 
         httpSuccess(res, {user})
     } catch (error) {
@@ -63,8 +79,10 @@ const updateUser = async (req, res) => {
         if(!id) throw new httpBadRequestError(res);
       
         const user = await service.findUser(id)
+        const body = matchedData(req)
 
-        const userUpdate = await service.updateUser(user,req.body)
+        const userUpdate = await service.updateUser(user, body)
+        delete userUpdate.password
         httpSuccess(res, {userUpdate})
     } catch (error) {
         httpInternalServerError(res, error)

@@ -23,8 +23,7 @@ const validateCreate = [
     check('password')
         .trim()
         .exists()
-        .not()
-        .isEmpty()
+        .notEmpty()
         .isString()
         .isLength({max:255}),
     check('role')
@@ -34,10 +33,8 @@ const validateCreate = [
         .isString()
         .isLength({max:10}),
     check('token')
+        .optional()
         .trim()
-        .exists()
-        .not()
-        .isEmpty()
         .isString()
         .isLength({max:255}),
     check('active')
