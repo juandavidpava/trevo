@@ -24,7 +24,8 @@ const addUser = async (req, res) => {
     try {
         req = matchedData(req)
         const foundUser = await service.searchUserEmail(req.email)
-        if(foundUser.length > 0) throw new httpBadRequestError(res,"email used");
+       
+        if(foundUser) throw new httpBadRequestError(res,"email used");
 
         const password = await encryptPassword(req.password)
         const token = await tokenSing(req)

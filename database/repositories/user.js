@@ -7,14 +7,14 @@ const getUsers = async () => {
     return users;
 };
 
-const addUser = async user => {
-    const userCreated = new User(user);
-    userCreated.save()
+const addUser = async user => {    
+    const userCreated = new User(user);  
+    await userCreated.save()
     return userCreated;
 };
 
-const findUser = async id => {
-    const user = User.findOne({id})
+const findUser = async id => {   
+    const user = await User.findOne({ where: {id}})
     return user;
 };
 

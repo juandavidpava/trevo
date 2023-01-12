@@ -5,15 +5,15 @@ import { service } from "../../services/user";
 import { tokenSing } from "../helpers/JWTHandler";
 
 const login = async (req, res) => {
-    try {
-        req = matchedData(req)
+    try {    
 
-        const user = await service.searchUserEmail(req.email)
+        /* req = matchedData(req) */
+        
+        const user = await service.searchUserEmail(req.body.email)               
         if(!user) throw new httpUnauthorizedError(res, 'Incorrect username or password');
 
-        const check = await comparePassword(req.password, user.password)
+        const check = await comparePassword(req.body.password, user.password)
         if(!check) throw new httpUnauthorizedError(res, 'Incorrect username or password');
-
 
         const userClass = await service.findUser(user.id)
         const token = tokenSing(user)
