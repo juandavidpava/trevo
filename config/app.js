@@ -1,5 +1,6 @@
 
 import express from "express";
+import cors from "cors";
 import morgan from "morgan";
 import config from "./config";
 import db  from "./database"
@@ -20,6 +21,7 @@ const dbConnection = async () => {
 
 dbConnection()
 // Middlewares
+app.use(cors())
 app.use(morgan("dev"));
 app.use(express.json());
 
