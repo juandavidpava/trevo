@@ -17,8 +17,8 @@ const validateCreate = [
         .not()
         .isEmpty()
         .isEmail()
-        .normalizeEmail()
         .toLowerCase()
+        .normalizeEmail()
         .isLength({max:90}),
     check('password')
         .trim()
@@ -29,8 +29,8 @@ const validateCreate = [
     check('role')
         .trim()
         .default('user')
-        .toLowerCase()
         .isString()
+        .toLowerCase()
         .isLength({max:10}),
     check('token')
         .optional()
@@ -53,14 +53,12 @@ const validateUpdate = [
         .optional()
         .trim()
         .isString()
-        .toLowerCase()
         .isLength({max:40}),
     check('email')
         .optional()
         .trim()
         .isEmail()
         .normalizeEmail()
-        .toLowerCase()
         .isLength({max:90}),
     check('password')
         .optional()
@@ -71,7 +69,6 @@ const validateUpdate = [
         .optional()
         .trim()
         .isString()
-        .toLowerCase()
         .isLength({max:10}),
     check('token')
         .optional()
