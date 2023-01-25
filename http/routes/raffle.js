@@ -9,5 +9,6 @@ router.get("/", middleware.checkAuthorization, controller.getUsers);
 router.post("/add", middleware.checkAuthorization,validateCreate, controller.addUser);
 router.get("/get/:id", middleware.checkAuthorization, controller.findUser);
 router.delete("/delete/:id", middleware.checkAuthorization, controller.deleteUser);
+router.put("/update/:id", middleware.checkAuthorization, validateUpdate, controller.updateUser);
 
 module.exports = router
