@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { middleware } from "../middlewares/jwt";
-import { controller } from "../controllers/user";
-import { validateCreate, validateUpdate } from '../validators/user'
+import { controller } from "../controllers/raffle";
+import { validateCreate } from '../validators/raffle'
 
 const router = Router();
 
-router.get("/", middleware.checkAuthorization, controller.getUsers);
-router.post("/add", middleware.checkAuthorization,validateCreate, controller.addUser);
-router.get("/get/:id", middleware.checkAuthorization, controller.findUser);
-router.delete("/delete/:id", middleware.checkAuthorization, controller.deleteUser);
-router.put("/update/:id", middleware.checkAuthorization, validateUpdate, controller.updateUser);
+router.get("/", middleware.checkAuthorization, controller.getRaffles);
+router.post("/add", middleware.checkAuthorization,validateCreate, controller.addRaffle);
+router.get("/get/:id", middleware.checkAuthorization, controller.findRaffle);
+router.delete("/delete/:id", middleware.checkAuthorization, controller.deleteRaffle);
+
 
 module.exports = router
