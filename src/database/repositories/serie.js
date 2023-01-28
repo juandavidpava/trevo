@@ -22,6 +22,10 @@ const addAllSeries = async (body) => {
     await db.query(`INSERT INTO series(number, \`index\`, idDraw) VALUES ${body}`, {type: QueryTypes.INSERT})
 }
 
+/* const getSeriesByRaffle = async indexRaffle = {
+    await db.query()
+} */
+
 export const repository = {
     getSeries,
     addSerie,
