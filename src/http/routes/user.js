@@ -5,9 +5,9 @@ import { validateCreate, validateUpdate } from '../validators/user'
 
 const router = Router();
 
-router.get("/", middleware.checkAuthorization, controller.getUsers);
-router.post("/add", middleware.checkAuthorization,validateCreate, controller.addUser);
-router.get("/get/:id", middleware.checkAuthorization, controller.findUser);
-router.delete("/delete/:id", middleware.checkAuthorization, controller.deleteUser);
+router.get("/", /*middleware.checkAuthorization,*/ controller.getUsers);
+router.post("/add", /*middleware.checkAuthorization,*/validateCreate, controller.addUser);
+router.get("/get/:id", /*middleware.checkAuthorization,*/ controller.findUser);
+router.delete("/delete/:id", /*middleware.checkAuthorization,*/ controller.deleteUser);
 
 module.exports = router

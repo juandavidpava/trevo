@@ -5,10 +5,10 @@ import { validateCreate } from '../validators/raffle'
 
 const router = Router();
 
-router.get("/", middleware.checkAuthorization, controller.getRaffles);
-router.post("/add", middleware.checkAuthorization,validateCreate, controller.addRaffle);
-router.get("/get/:id", middleware.checkAuthorization, controller.findRaffle);
-router.delete("/delete/:id", middleware.checkAuthorization, controller.deleteRaffle);
+router.get("/", /* middleware.checkAuthorization, */controller.getRaffles);
+router.post("/add", /* middleware.checkAuthorization,*/validateCreate, controller.addRaffle);
+router.get("/get/:id", /* middleware.checkAuthorization,*/ controller.findRaffle);
+router.delete("/delete/:id",/* middleware.checkAuthorization,*/ controller.deleteRaffle);
 
 
 module.exports = router

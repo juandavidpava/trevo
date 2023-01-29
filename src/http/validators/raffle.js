@@ -27,19 +27,26 @@ const validateCreate = [
         .exists()
         .not()
         .isEmpty()
-        .isLength({max:50}),
+        .isLength({max:500}),
     check('text2')
         .trim()
         .exists()
         .not()
         .isEmpty()
-        .isLength({max:50}), 
+        .isLength({max:500}), 
     check('text3')
         .trim()
         .exists()
         .not()
         .isEmpty()
-        .isLength({max:50}),  
+        .isLength({max:500}),
+    check('date')
+        .trim()
+        .optional(),
+    check('idDraw')
+        .trim()
+        .isNumeric()
+        .isInt(),                    
     (req, res, next) => {
         validationSchema(req, res, next)
     }

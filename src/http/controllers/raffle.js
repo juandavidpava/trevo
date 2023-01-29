@@ -48,17 +48,6 @@ const deleteRaffle = async (req, res) => {
     }
 };
 
-const getSeries = (req, res) => {
-    try {
-        const { id } = req?.params
-        if(!id) throw new httpBadRequestError(res);
-    } catch (err) {
-        httpInternalServerError(res, error)
-    }
-}
-
-
-
 export const controller = {
     getRaffles,
     addRaffle,

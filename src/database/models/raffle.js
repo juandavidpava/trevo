@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from "../../config/database";
 
-const Raffle = db.define('draws', {
+const Raffle = db.define('raffles', {
     name:{
         type: DataTypes.STRING
     },
@@ -22,6 +22,9 @@ const Raffle = db.define('draws', {
     },
     date: {
         type: DataTypes.DATE
+    },
+    idDraw: {
+        type: DataTypes.BIGINT
     }
 
 });

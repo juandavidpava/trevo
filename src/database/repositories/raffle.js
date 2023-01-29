@@ -1,4 +1,4 @@
-import {Raffle } from "../models/draw";
+import {Raffle } from "../models/raffle";
 
 const getRaffles = async () => {
     const raffles = Raffle.findAll();
