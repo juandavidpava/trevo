@@ -1,0 +1,29 @@
+{
+  "name": "trevo",
+  "version": "1.0.0",
+  "description": "sorteo de boletas de loteria",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "Juan Camilo Castro and Juan David Pava",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "cors": "2.8.5",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "express-validator": "6.14.3",
+    "jsonwebtoken": "9.0.0",
+    "mysql2": "3.1.0",
+    "sequelize": "6.28.0"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.16",
+    "morgan": "1.10.0",
+    "nodemon": "2.0.20"
+  }
+}
